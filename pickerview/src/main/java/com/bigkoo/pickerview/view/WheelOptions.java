@@ -305,12 +305,13 @@ public class WheelOptions<T> {
     /**
      * 设置字体样式
      *
-     * @param font 系统提供的几种样式
+     * @param centerTypeface 系统提供的几种样式
+     * @param outTypeface 系统提供的几种样式
      */
-    public void setTypeface(Typeface font) {
-        wv_option1.setTypeface(font);
-        wv_option2.setTypeface(font);
-        wv_option3.setTypeface(font);
+    public void setTypeface(Typeface centerTypeface, Typeface outTypeface) {
+        wv_option1.setTypeface(centerTypeface, outTypeface);
+        wv_option2.setTypeface(centerTypeface, outTypeface);
+        wv_option3.setTypeface(centerTypeface, outTypeface);
     }
 
     /**

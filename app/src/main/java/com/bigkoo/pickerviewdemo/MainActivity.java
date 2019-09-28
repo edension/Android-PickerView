@@ -120,71 +120,74 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startDate.set(2014, 1, 23);
         Calendar endDate = Calendar.getInstance();
         endDate.set(2069, 2, 28);
+
         //时间选择器 ，自定义布局
-        pvCustomLunar = new TimePickerBuilder(this, new OnTimeSelectListener() {
+        TimePickerBuilder timePickerBuilder= new TimePickerBuilder(this, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {//选中事件回调
                 Toast.makeText(MainActivity.this, getTime(date), Toast.LENGTH_SHORT).show();
             }
-        })
-                .setDate(selectedDate)
-                .setRangDate(startDate, endDate)
-                .setLayoutRes(R.layout.pickerview_custom_lunar, new CustomListener() {
-
+        });
+        CustomListener customListener =  new CustomListener() {
+            @Override
+            public void customLayout(final View v) {
+                final TextView tvSubmit = (TextView) v.findViewById(R.id.tv_finish);
+                ImageView ivCancel = (ImageView) v.findViewById(R.id.iv_cancel);
+                tvSubmit.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void customLayout(final View v) {
-                        final TextView tvSubmit = (TextView) v.findViewById(R.id.tv_finish);
-                        ImageView ivCancel = (ImageView) v.findViewById(R.id.iv_cancel);
-                        tvSubmit.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                pvCustomLunar.returnData();
-                                pvCustomLunar.dismiss();
-                            }
-                        });
-                        ivCancel.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                pvCustomLunar.dismiss();
-                            }
-                        });
-                        //公农历切换
-                        CheckBox cb_lunar = (CheckBox) v.findViewById(R.id.cb_lunar);
-                        cb_lunar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                            @Override
-                            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                                pvCustomLunar.setLunarCalendar(!pvCustomLunar.isLunarCalendar());
-                                //自适应宽
-                                setTimePickerChildWeight(v, isChecked ? 0.8f : 1f, isChecked ? 1f : 1.1f);
-                            }
-                        });
-
+                    public void onClick(View v) {
+                        pvCustomLunar.returnData();
+                        pvCustomLunar.dismiss();
                     }
-
-                    /**
-                     * 公农历切换后调整宽
-                     * @param v
-                     * @param yearWeight
-                     * @param weight
-                     */
-                    private void setTimePickerChildWeight(View v, float yearWeight, float weight) {
-                        ViewGroup timePicker = (ViewGroup) v.findViewById(R.id.timepicker);
-                        View year = timePicker.getChildAt(0);
-                        LinearLayout.LayoutParams lp = ((LinearLayout.LayoutParams) year.getLayoutParams());
-                        lp.weight = yearWeight;
-                        year.setLayoutParams(lp);
-                        for (int i = 1; i < timePicker.getChildCount(); i++) {
-                            View childAt = timePicker.getChildAt(i);
-                            LinearLayout.LayoutParams childLp = ((LinearLayout.LayoutParams) childAt.getLayoutParams());
-                            childLp.weight = weight;
-                            childAt.setLayoutParams(childLp);
-                        }
+                });
+                ivCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        pvCustomLunar.dismiss();
                     }
-                })
+                });
+                //公农历切换
+                CheckBox cb_lunar = (CheckBox) v.findViewById(R.id.cb_lunar);
+                cb_lunar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        pvCustomLunar.setLunarCalendar(!pvCustomLunar.isLunarCalendar());
+                        //自适应宽
+                        setTimePickerChildWeight(v, isChecked ? 0.8f : 1f, isChecked ? 1f : 1.1f);
+                    }
+                });
+            }
+
+            /**
+             * 公农历切换后调整宽
+             * @param v
+             * @param yearWeight
+             * @param weight
+             */
+            private void setTimePickerChildWeight(View v, float yearWeight, float weight) {
+                ViewGroup timePicker = (ViewGroup) v.findViewById(R.id.timepicker);
+                View year = timePicker.getChildAt(0);
+                LinearLayout.LayoutParams lp = ((LinearLayout.LayoutParams) year.getLayoutParams());
+                lp.weight = yearWeight;
+                year.setLayoutParams(lp);
+                for (int i = 1; i < timePicker.getChildCount(); i++) {
+                    View childAt = timePicker.getChildAt(i);
+                    LinearLayout.LayoutParams childLp = ((LinearLayout.LayoutParams) childAt.getLayoutParams());
+                    childLp.weight = weight;
+                    childAt.setLayoutParams(childLp);
+                }
+            }
+        };
+
+        timePickerBuilder.
+                setDate(selectedDate)
+                .setRangDate(startDate, endDate)
+                .setLayoutRes(R.layout.pickerview_custom_lunar, null)
                 .setType(new boolean[]{true, true, true, false, false, false})
                 .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
-                .setDividerColor(Color.RED)
-                .build();
+                .setDividerColor(Color.RED);
+
+        pvCustomLunar = timePickerBuilder.build();
     }
 
 

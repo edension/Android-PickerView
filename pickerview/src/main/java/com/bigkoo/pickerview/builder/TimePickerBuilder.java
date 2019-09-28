@@ -1,6 +1,7 @@
 package com.bigkoo.pickerview.builder;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.annotation.ColorInt;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,16 @@ public class TimePickerBuilder {
 
     public TimePickerBuilder addOnCancelClickListener(View.OnClickListener cancelListener) {
         mPickerOptions.cancelListener = cancelListener;
+        return this;
+    }
+
+    public TimePickerBuilder hideTopBar() {
+        mPickerOptions.isHideTopBar = true;
+        return this;
+    }
+
+    public TimePickerBuilder setGlobalItemsVisible(int visibleNum) {
+        WheelView.itemsVisible = visibleNum;
         return this;
     }
 
@@ -116,6 +127,12 @@ public class TimePickerBuilder {
 
     public TimePickerBuilder setTitleSize(int textSizeTitle) {
         mPickerOptions.textSizeTitle = textSizeTitle;
+        return this;
+    }
+
+    public TimePickerBuilder setTypeface(Typeface centerTypeface, Typeface outTypeface) {
+        mPickerOptions.centerTypeface = centerTypeface;
+        mPickerOptions.outTypeface = outTypeface;
         return this;
     }
 

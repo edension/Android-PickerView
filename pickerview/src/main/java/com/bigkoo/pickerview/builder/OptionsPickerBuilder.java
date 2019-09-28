@@ -201,11 +201,6 @@ public class OptionsPickerBuilder {
         return this;
     }
 
-    public OptionsPickerBuilder setTypeface(Typeface font) {
-        mPickerOptions.font = font;
-        return this;
-    }
-
     public OptionsPickerBuilder setCyclic(boolean cyclic1, boolean cyclic2, boolean cyclic3) {
         mPickerOptions.cyclic1 = cyclic1;
         mPickerOptions.cyclic2 = cyclic2;

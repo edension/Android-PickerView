@@ -108,7 +108,9 @@ public class PickerOptions {
 
     public boolean cancelable = true;//是否能取消
     public boolean isCenterLabel = false;//是否只显示中间的label,默认每个item都显示
-    public Typeface font = Typeface.MONOSPACE;//字体样式
+    public Typeface centerTypeface = Typeface.DEFAULT;//字体样式
+    public Typeface outTypeface = Typeface.DEFAULT;//字体样式
     public WheelView.DividerType dividerType = WheelView.DividerType.FILL;//分隔线类型
 
+    public boolean isHideTopBar;
 }

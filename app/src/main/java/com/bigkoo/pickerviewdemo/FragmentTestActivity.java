@@ -14,10 +14,10 @@ public class FragmentTestActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragmenttest);
+
         mFragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_activity_main, new TestFragment());
         fragmentTransaction.commitAllowingStateLoss();
-
     }
 }

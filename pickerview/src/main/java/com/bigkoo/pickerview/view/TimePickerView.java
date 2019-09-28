@@ -46,6 +46,10 @@ public class TimePickerView extends BasePickerView implements View.OnClickListen
             TextView tvTitle = (TextView) findViewById(R.id.tvTitle);
             RelativeLayout rv_top_bar = (RelativeLayout) findViewById(R.id.rv_topbar);
 
+            if (mPickerOptions.isHideTopBar) {
+                rv_top_bar.setVisibility(View.GONE);
+            }
+
             //确定和取消按钮
             Button btnSubmit = (Button) findViewById(R.id.btnSubmit);
             Button btnCancel = (Button) findViewById(R.id.btnCancel);
