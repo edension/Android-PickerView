@@ -1,3 +1,9 @@
+    20190928
+    1. 新增了builder的设置方法
+    2. wheelView对于outPaint的alpha变化根据color值的透明度作为最大值
+    3. 将wheelview module合并到了pickerview module
+
+========================================================================
 
 ## Android-PickerView
 
